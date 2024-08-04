@@ -12,7 +12,9 @@ const (
 )
 
 var (
-	Port string //大写表示其他文件可以访问
+	Port          string //大写表示其他文件可以访问
+	JwtSignKey    string
+	JwtEepireTime int64 //token维持时间：分钟
 )
 
 func initLogConfig(logLevel string) {
@@ -30,13 +32,19 @@ func initLogConfig(logLevel string) {
 func init() {
 	// fmt.Println("加载程序配置")
 	logs.Debug(nil, "开始加载程序配置")
+
 	//环境变量加载我们的程序配置
 	viper.SetDefault("LOG_LEVEL", "debug")
 	viper.AutomaticEnv()
-	//配置程序启动端口号
+	//设置默认环境变量
+	viper.SetDefault("JWT_SIGN_KEY", "ou_fan")
+	viper.SetDefault("JWT_EXPIRE_TIME", 120)
 	viper.SetDefault("PORT", ":8080")
+
 	logLevel := viper.GetString("LOG_LEVEL") //获取程序配置
 	Port = viper.GetString("PORT")
+	JwtSignKey = viper.GetString("JWT_SIGN_KEY")
+	JwtEepireTime = viper.GetInt64("JWT_EXPIRE_TIME")
 	//加载日志输出格式
 	initLogConfig(logLevel)
 }
