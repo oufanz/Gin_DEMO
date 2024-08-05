@@ -9,5 +9,7 @@ func Debug(fields map[string]interface{}, msg string) {
 }
 func Info(fields map[string]interface{}, msg string) {
 	logrus.WithFields(fields).Info(msg)
-
+}
+func Error(fields map[string]interface{}, msg string) {
+	logrus.WithFields(fields).Error(msg)
 }
