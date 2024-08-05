@@ -43,6 +43,7 @@ func ParseToken(ss string) (*MyCustomClaims, error) {
 	})
 	if err != nil {
 		logs.Error(nil, "解析失败")
+		return nil, err
 	} else if claims, ok := token.Claims.(*MyCustomClaims); ok {
 		return claims, nil
 	} else {

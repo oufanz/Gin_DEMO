@@ -15,6 +15,8 @@ var (
 	Port          string //大写表示其他文件可以访问
 	JwtSignKey    string
 	JwtEepireTime int64 //token维持时间：分钟
+	Username      string
+	Password      string
 )
 
 func initLogConfig(logLevel string) {
@@ -40,11 +42,14 @@ func init() {
 	viper.SetDefault("JWT_SIGN_KEY", "ou_fan")
 	viper.SetDefault("JWT_EXPIRE_TIME", 120)
 	viper.SetDefault("PORT", ":8080")
-
+	viper.SetDefault("USERNAME", "oufan")
+	viper.SetDefault("PASSWORD", "dot")
 	logLevel := viper.GetString("LOG_LEVEL") //获取程序配置
 	Port = viper.GetString("PORT")
 	JwtSignKey = viper.GetString("JWT_SIGN_KEY")
 	JwtEepireTime = viper.GetInt64("JWT_EXPIRE_TIME")
+	Username = viper.GetString("USERNAME")
+	Password = viper.GetString("PASSWORD")
 	//加载日志输出格式
 	initLogConfig(logLevel)
 }
